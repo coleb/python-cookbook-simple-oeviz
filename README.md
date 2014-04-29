@@ -1,4 +1,13 @@
-python-cookbook-simple-oeviz
-============================
+OEViz - a simple OEDepict webserver
+===================================
 
-A simple Python example of image depiction - see http://docs.eyesopen.com/toolkits/cookbook/python
+*From the OpenEye Python Cookbook*
+
+See more information: http://docs.eyesopen.com/toolkits/cookbook/python
+
+Usage
+=====
+
+* Install Flask and the OpenEye Python Toolkit
+* Run `python cookbook.py`
+* Visit http://127.0.0.1:5000
