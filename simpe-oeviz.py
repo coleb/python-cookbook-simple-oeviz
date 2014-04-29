@@ -2,7 +2,11 @@
  Flask server for OEViz
  Copyright (C) 2014 OpenEye Scientific Software, Inc.
 """
-from urllib import unquote
+
+try:
+    from urllib.parse import unquote
+except ImportError:
+    from urllib import unquote
 
 from flask import Flask, render_template, Response
 from openeye.oechem import OETransparentColor, OEGraphMol, OEParseSmiles, OERed
