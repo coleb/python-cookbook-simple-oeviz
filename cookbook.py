@@ -31,10 +31,10 @@ def depict_smiles(smiles):
     # Process SMILES
     mol = OEGraphMol()
     parsed = OEParseSmiles(mol, str(unquote(smiles)))
-    OEPrepareDepiction(mol)
 
     if parsed:
         # Create image of molecule
+        OEPrepareDepiction(mol)
         opts = OE2DMolDisplayOptions(image.GetWidth(),
                                      image.GetHeight(), OEScale_AutoScale)
         disp = OE2DMolDisplay(mol, opts)
