@@ -9,5 +9,5 @@ Usage
 =====
 
 * Install Flask and the OpenEye Python Toolkit
-* Run `python cookbook.py`
+* Run `python simple-oeviz.py`
 * Visit http://127.0.0.1:5000
