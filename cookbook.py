@@ -10,7 +10,8 @@ from openeye.oedepict import (OEImage, OE2DMolDisplayOptions,
                               OEScale_AutoScale, OE2DMolDisplay,
                               OERenderMolecule, OEWriteImageToString,
                               OEPrepareDepiction, OE2DPoint, OEFont,
-                              OEFontFamily_Helvetica)
+                              OEFontFamily_Helvetica, OEAlignment_Center,
+                              OEFontStyle_Default)
 
 app = Flask(__name__)
 app.debug = True
@@ -41,10 +42,7 @@ def depict_smiles(smiles):
         OERenderMolecule(image, disp)
     else:
         # Create error image
-        font = OEFont()
-        font.SetFamily(OEFontFamily_Helvetica)
-        font.SetSize(20)
-        font.SetColor(OERed)
+        font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20, OEAlignment_Center, OERed)
         image.DrawText(OE2DPoint(image.GetWidth()/2.0, image.GetHeight()/2.0),
                        'Your SMILES is not valid', font)
 
