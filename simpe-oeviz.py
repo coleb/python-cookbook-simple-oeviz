@@ -50,9 +50,9 @@ def depict_smiles(smiles):
         image.DrawText(OE2DPoint(image.GetWidth()/2.0, image.GetHeight()/2.0),
                        'Your SMILES is not valid', font)
 
-    img_content = OEWriteImageToString('png', image)
+    img_content = OEWriteImageToString('svg', image)
 
-    return Response(img_content, mimetype='image/png')
+    return Response(img_content, mimetype='image/svg+xml')
 
 
 if __name__ == "__main__":
