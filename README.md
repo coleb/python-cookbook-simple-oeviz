@@ -5,6 +5,8 @@ OEViz - a simple OEDepict webserver
 
 See more information: http://docs.eyesopen.com/toolkits/cookbook/python
 
+This code works on OpenEye supported versions of Python 2 & 3.
+
 Usage
 =====
 
