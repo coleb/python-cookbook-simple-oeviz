@@ -9,7 +9,7 @@ except ImportError:
     from urllib import unquote
 
 from flask import Flask, render_template, Response
-from openeye.oechem import OETransparentColor, OEGraphMol, OEParseSmiles, OERed
+from openeye.oechem import OEGraphMol, OEParseSmiles, OERed
 from openeye.oedepict import (OEImage, OE2DMolDisplayOptions,
                               OEScale_AutoScale, OE2DMolDisplay,
                               OERenderMolecule, OEWriteImageToString,
@@ -31,7 +31,7 @@ def depict():
 def depict_smiles(smiles):
     """ OEChem and OEDepict image generation """
     # Image to draw on
-    image = OEImage(400, 400, OETransparentColor)
+    image = OEImage(400, 400)
 
     # Process SMILES
     mol = OEGraphMol()
@@ -46,7 +46,8 @@ def depict_smiles(smiles):
         OERenderMolecule(image, disp)
     else:
         # Create error image
-        font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20, OEAlignment_Center, OERed)
+        font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20,
+                      OEAlignment_Center, OERed)
         image.DrawText(OE2DPoint(image.GetWidth()/2.0, image.GetHeight()/2.0),
                        'Your SMILES is not valid', font)
 
