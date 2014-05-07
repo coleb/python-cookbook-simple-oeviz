@@ -9,7 +9,7 @@ except ImportError:
     from urllib import unquote
 
 from flask import Flask, render_template, Response
-from openeye.oechem import OEGraphMol, OEParseSmiles, OERed
+from openeye.oechem import OEGraphMol, OESmilesToMol, OERed
 from openeye.oedepict import (OEImage, OE2DMolDisplayOptions,
                               OEScale_AutoScale, OE2DMolDisplay,
                               OERenderMolecule, OEWriteImageToString,
@@ -35,7 +35,7 @@ def depict_smiles(smiles):
 
     # Process SMILES
     mol = OEGraphMol()
-    parsed = OEParseSmiles(mol, str(unquote(smiles)))
+    parsed = OESmilesToMol(mol, str(unquote(smiles)))
 
     if parsed:
         # Create image of molecule
