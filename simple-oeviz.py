@@ -10,9 +10,7 @@ except ImportError:
 
 from flask import Flask, render_template, Response
 from openeye.oechem import OEGraphMol, OESmilesToMol, OERed
-from openeye.oedepict import (OEImage, OE2DMolDisplayOptions,
-                              OEScale_AutoScale, OE2DMolDisplay,
-                              OERenderMolecule, OEWriteImageToString,
+from openeye.oedepict import (OEImage, OERenderMolecule, OEWriteImageToString,
                               OEPrepareDepiction, OE2DPoint, OEFont,
                               OEFontFamily_Helvetica, OEAlignment_Center,
                               OEFontStyle_Default)
