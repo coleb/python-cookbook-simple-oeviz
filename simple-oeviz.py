@@ -40,10 +40,7 @@ def depict_smiles(smiles):
     if parsed:
         # Create image of molecule
         OEPrepareDepiction(mol)
-        opts = OE2DMolDisplayOptions(image.GetWidth(),
-                                     image.GetHeight(), OEScale_AutoScale)
-        disp = OE2DMolDisplay(mol, opts)
-        OERenderMolecule(image, disp)
+        OERenderMolecule(image, mol)
     else:
         # Create error image
         font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20,
