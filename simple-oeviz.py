@@ -2,6 +2,7 @@
  Flask server for OEViz
  Copyright (C) 2014-2015 OpenEye Scientific Software, Inc.
 """
+import os
 
 try:
     from urllib.parse import unquote
@@ -9,7 +10,7 @@ except ImportError:
     from urllib import unquote
 
 from flask import Flask, render_template, Response
-from openeye.oechem import OEGraphMol, OESmilesToMol, OERed
+from openeye.oechem import OEGraphMol, OESmilesToMol, OERed, OEInit2DRingDictionary
 from openeye.oedepict import (OEImage, OERenderMolecule, OEWriteImageToString,
                               OEPrepareDepiction, OE2DPoint, OEFont,
                               OEFontFamily_Helvetica, OEAlignment_Center,
@@ -18,6 +19,9 @@ from openeye.oedepict import (OEImage, OERenderMolecule, OEWriteImageToString,
 app = Flask(__name__)
 app.debug = True
 
+RING_DICT_FILENAME = "2DRingDictionary.oeb"
+if os.path.exists(RING_DICT_FILENAME):
+    assert OEInit2DRingDictionary(RING_DICT_FILENAME)
 
 @app.route('/')
 def depict():
