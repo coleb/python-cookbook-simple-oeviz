@@ -43,7 +43,7 @@ def depict_smiles(smiles):
         # Create error image
         font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20,
                       OEAlignment_Center, OERed)
-        image.DrawText(OE2DPoint(image.GetWidth()/2.0, image.GetHeight()/2.0),
+        image.DrawText(OE2DPoint(image.GetWidth() / 2.0, image.GetHeight() / 2.0),
                        'Your SMILES is not valid', font)
 
     img_content = OEWriteImageToString('svg', image)
