@@ -1,6 +1,6 @@
 """
  Flask server for OEViz
- Copyright (C) 2014 OpenEye Scientific Software, Inc.
+ Copyright (C) 2014-2015 OpenEye Scientific Software, Inc.
 """
 
 try:
@@ -33,7 +33,7 @@ def depict_smiles(smiles):
 
     # Process SMILES
     mol = OEGraphMol()
-    parsed = OESmilesToMol(mol, str(unquote(smiles)))
+    parsed = OESmilesToMol(mol, unquote(smiles).encode("unicode-escape"))
 
     if parsed:
         # Create image of molecule
