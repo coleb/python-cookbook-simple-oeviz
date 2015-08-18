@@ -1,6 +1,6 @@
 """
  Flask server for OEViz
- Copyright (C) 2014 OpenEye Scientific Software, Inc.
+ Copyright (C) 2014, 2015 OpenEye Scientific Software, Inc.
 """
 
 try:
@@ -13,7 +13,13 @@ from openeye.oechem import OEGraphMol, OESmilesToMol, OERed
 from openeye.oedepict import (OEImage, OERenderMolecule, OEWriteImageToString,
                               OEPrepareDepiction, OE2DPoint, OEFont,
                               OEFontFamily_Helvetica, OEAlignment_Center,
-                              OEFontStyle_Default)
+                              OEFontStyle_Default, OE2DMolDisplay)
+
+from emoji.unicode_codes import EMOJI_UNICODE
+
+from random import choice
+
+ALL_EMOJI = EMOJI_UNICODE.values()
 
 app = Flask(__name__)
 app.debug = True
@@ -34,11 +40,21 @@ def depict_smiles(smiles):
     # Process SMILES
     mol = OEGraphMol()
     parsed = OESmilesToMol(mol, str(unquote(smiles)))
-
+    
     if parsed:
         # Create image of molecule
+        newtitle = []
+        for c in mol.GetTitle():
+            newtitle.append(choice(ALL_EMOJI))
+        mol.SetTitle(("".join(newtitle)).encode("UTF-8"))
+        
         OEPrepareDepiction(mol)
-        OERenderMolecule(image, mol)
+
+        disp = OE2DMolDisplay(mol)
+        for adisp in disp.GetAtomDisplays():
+            adisp.SetLabel(choice(ALL_EMOJI).encode("UTF-8"))
+        
+        OERenderMolecule(image, disp)
     else:
         # Create error image
         font = OEFont(OEFontFamily_Helvetica, OEFontStyle_Default, 20,
@@ -52,4 +68,4 @@ def depict_smiles(smiles):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0")
